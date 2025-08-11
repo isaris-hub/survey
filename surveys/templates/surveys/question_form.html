@@ -2,8 +2,14 @@
 {% block content %}
 <h1>Vraag</h1>
 <form method="post">
-  {% csrf_token %}
-  {{ form.as_p }}
-  <button class="btn btn-primary" type="submit">Opslaan</button>
+  <table>
+    <tr>
+      <td colspan="2">{% csrf_token %}</td>
+    </tr>
+    {{ form.as_table }}
+    <tr>
+      <td colspan="2"><button class="btn btn-primary" type="submit">Opslaan</button></td>
+    </tr>
+  </table>
 </form>
 {% endblock %}
