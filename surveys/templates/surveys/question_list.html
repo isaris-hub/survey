@@ -2,11 +2,28 @@
 {% block content %}
 <h1>Vragen voor {{ survey.title }}</h1>
 <a class="btn btn-primary" href="{% url 'question_add' survey.id %}">Nieuwe vraag</a>
-<ul class="mt-3">
-  {% for q in questions %}
-    <li>{{ q.number }}. {{ q.title }} - <a href="{% url 'question_edit' q.id %}">bewerk</a> - <a href="{% url 'question_delete' q.id %}">verwijder</a></li>
-  {% empty %}
-    <li>Geen vragen.</li>
-  {% endfor %}
-</ul>
+<table class="table mt-3">
+  <thead>
+    <tr>
+      <th>Nr</th>
+      <th>Vraag</th>
+      <th>Bewerk</th>
+      <th>Verwijder</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for q in questions %}
+      <tr>
+        <td>{{ q.number }}</td>
+        <td>{{ q.title }}</td>
+        <td><a href="{% url 'question_edit' q.id %}">bewerk</a></td>
+        <td><a href="{% url 'question_delete' q.id %}">verwijder</a></td>
+      </tr>
+    {% empty %}
+      <tr>
+        <td colspan="4">Geen vragen.</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
 {% endblock %}
