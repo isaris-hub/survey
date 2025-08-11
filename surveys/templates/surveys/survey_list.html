@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Enquêtes</h1>
+<a class="btn btn-primary" href="{% url 'survey_add' %}">Nieuwe enquête</a>
+<ul class="mt-3">
+  {% for survey in object_list %}
+    <li>{{ survey.title }} - <a href="{% url 'survey_edit' survey.id %}">bewerk</a> - <a href="{% url 'survey_delete' survey.id %}">verwijder</a> - <a href="{% url 'question_list' survey.id %}">vragen</a> - <a href="{% url 'invite' survey.id %}">uitnodigen</a> - <a href="{% url 'results' survey.id %}">resultaten</a></li>
+  {% empty %}
+    <li>Geen enquêtes.</li>
+  {% endfor %}
+</ul>
+{% endblock %}
