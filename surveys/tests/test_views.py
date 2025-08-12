@@ -21,6 +21,10 @@ class SurveyViewTests(TestCase):
         self.assertEqual(response.status_code, 302)
         self.assertEqual(Survey.objects.count(), 1)
 
-    def test_login_required(self) -> None:
+    def test_home_page_accessible(self) -> None:
         response = self.client.get('/')
+        self.assertEqual(response.status_code, 200)
+
+    def test_login_required_for_surveys(self) -> None:
+        response = self.client.get('/surveys/')
         self.assertEqual(response.status_code, 302)

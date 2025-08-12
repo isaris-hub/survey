@@ -16,6 +16,11 @@ from .forms import SurveyForm, QuestionForm, DynamicResponseForm
 from .models import Survey, Question, Option, Invitation, Answer
 
 
+def home(request: HttpRequest) -> HttpResponse:
+    """Render the landing page with a welcome message."""
+    return render(request, 'home.html')
+
+
 class SurveyListView(LoginRequiredMixin, ListView):
     model = Survey
     template_name = 'surveys/survey_list.html'
