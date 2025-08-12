@@ -1,11 +1,14 @@
 """Base settings for SurveyPro Django project."""
 from pathlib import Path
+import os
+from dotenv import load_dotenv
 
 BASE_DIR = Path(__file__).resolve().parent.parent
+load_dotenv(BASE_DIR / ".env")
 
-SECRET_KEY = 'dummy-secret-key'
-DEBUG = True
-ALLOWED_HOSTS: list[str] = []
+SECRET_KEY = os.getenv("SECRET_KEY", "dummy-secret-key")
+DEBUG = os.getenv("DEBUG", "True") == "True"
+ALLOWED_HOSTS: list[str] = [] if not os.getenv("ALLOWED_HOSTS") else os.getenv("ALLOWED_HOSTS").split(",")
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -59,8 +62,8 @@ AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'},
 ]
 
-LANGUAGE_CODE = 'nl'
-TIME_ZONE = 'UTC'
+LANGUAGE_CODE = os.getenv("LANGUAGE_CODE", "nl")
+TIME_ZONE = os.getenv("TIME_ZONE", "UTC")
 USE_I18N = True
 USE_TZ = True
 
